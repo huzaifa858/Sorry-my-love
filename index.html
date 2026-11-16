@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Areeba — A Little World of Sorry</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Caveat:wght@500&family=Nunito:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--cr:#FFF9F7;--cb:#FFB7CE;--rp:#F48FB1;--dr:#C85D83;--lv:#E9DDFB;--ink:#6b2a45;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--cr:#3a2433;--ink:#ffe4ef;--dr:#ffb7ce}}
+[hidden]{display:none!important}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font:600 16px/1.6 Nunito,system-ui,sans-serif;color:var(--ink);background:linear-gradient(#FFE4EF,#FFF9F7 45%,#E9DDFB) fixed;overflow-x:hidden}
+@media(prefers-color-scheme:dark){body{background:linear-gradient(#2a1a26,#3a2433) fixed}}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;color:var(--dr);margin:0 0 12px}h1{font-size:2.3rem}h2{font-size:2rem}
+section{max-width:620px;margin:0 auto;padding:54px 18px;text-align:center;position:relative;z-index:1}
+.hand{font-family:Caveat,cursive;font-size:1.4rem;line-height:1.45;white-space:pre-line}
+button{font:inherit;border:0;border-radius:99px;background:var(--rp);color:#fff;padding:12px 24px;cursor:pointer;box-shadow:0 6px 18px #f48fb155;margin:4px}
+button:disabled{opacity:.35}button:active{transform:scale(.96)}
+.card{background:var(--cr);border:1.5px dashed var(--cb);border-radius:24px;padding:20px;box-shadow:0 8px 24px #c85d8322}
+.big{font-size:4rem}
+#hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.env{position:relative;width:190px;height:124px;background:var(--cb);border-radius:8px;margin:34px 0 22px}
+.env i{position:absolute;left:12px;right:12px;top:8px;height:92px;background:var(--cr);border-radius:6px;transition:transform .9s}
+.env b{position:absolute;inset:0;background:var(--rp);border-radius:8px;clip-path:polygon(0 100%,50% 42%,100% 100%)}
+.env u{position:absolute;left:0;right:0;top:0;height:66px;background:var(--dr);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s}
+.open u{transform:rotateX(180deg)}.open i{transform:translateY(-58px);z-index:3}
+.p{position:fixed;top:-30px;pointer-events:none;z-index:0;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(112vh) rotate(360deg)}}
+@keyframes turn{from{opacity:0;transform:rotateY(70deg)}}.turn{animation:turn .5s}
+@keyframes shake{25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}.shake{animation:shake .25s 4}
+#mu{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:10px;z-index:9;padding:8px 14px}
+.bar{height:6px;background:var(--lv);border-radius:9px;margin:14px 0 4px}.bar div{height:100%;width:0;background:var(--rp);border-radius:9px;transition:width .4s}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.rc{background:var(--cr);color:var(--ink);box-shadow:0 4px 14px #c85d8322;border:1.5px solid var(--cb);border-radius:18px;min-height:96px;font-size:.92rem;line-height:1.35}
+.rc.f{background:var(--lv);color:var(--ink);animation:turn .45s}
+#arena{position:relative;height:260px;overflow:hidden;border-radius:24px;background:var(--cr);border:1.5px dashed var(--cb);touch-action:manipulation}
+.h{position:absolute;top:-40px;font-size:34px;animation:fall linear forwards;cursor:pointer;user-select:none}
+.sw{position:relative;width:280px;height:120px;margin:0 auto;max-width:100%}
+.sw p{position:absolute;inset:0;margin:0;display:grid;place-items:center;padding:0 12px;background:var(--lv);border-radius:16px;color:var(--ink)}.sw canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:16px;transition:opacity .6s;touch-action:none}
+#lm{position:fixed;inset:0;z-index:20;background:#c85d8399;display:grid;place-items:center;padding:18px}
+.pr{display:flex;gap:10px;align-items:center;text-align:left;margin:8px 0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+<button id="mu" onclick="music(!on)" aria-label="Music">♪ off</button>
+<section id="hero"><h1>Hey, Areeba… 🌸</h1><p>I made a little something for you.<br>Please don’t leave before exploring it.</p>
+<div class="env" id="env"><i></i><b></b><u></u></div><button id="go">Open Your Little World ♡</button></section>
+<main id="main" hidden>
+<section><h2>Before Anything Else…</h2><div class="card"><p class="hand" id="tw" style="min-height:260px;text-align:left"></p><button id="more" hidden>Read A Little More ♡</button><p class="hand" id="mo" hidden>I don’t need you to say anything back. I just want you to know that your feelings are not small to me, and neither are you.</p></div></section>
+<section><h2>Our Little Storybook</h2><div class="card"><div id="chb"></div><div class="bar"><div id="pg"></div></div><small id="cn"></small><br><button id="pv">‹ Back</button><button id="nx">Next ›</button></div></section>
+<section><h2>Little Things I Adore About You</h2><p>Tap a flower.</p><div class="grid" id="rs"></div></section>
+<section><h2>Secret Letters 💌</h2><div class="grid" id="ls"></div></section>
+<section><h2>Catch The Hearts 🎮</h2><p id="sc">Tap the falling hearts for 15 seconds.</p><div id="arena"></div><button id="pl">Play ♡</button></section>
+<section><h2>Scratch To Reveal</h2><div class="sw"><p class="hand">You’re someone worth appreciating every single day. ♡</p><canvas id="sk" width="280" height="120"></canvas></div><button id="rs2">Scratch again</button></section>
+<section><h2>Things I Want To Do Better</h2><div id="pm"></div><p class="hand">Promises are beautiful, but I know actions matter more.</p></section>
+<section><h2>One Last Thing 🎁</h2><p>There’s one last thing I wanted you to see…</p><div class="big" id="gf" style="margin:8px">🎁</div><button id="gb">Open Your Surprise 🎀</button><div class="card" id="gl" hidden><p class="hand" id="gt" style="text-align:left"></p></div></section>
+<section><h1>That’s Everything, Areeba… 🌸</h1><p>I hope this little world made you smile, even just a little.</p><p class="hand">You don’t have to reply right away.<br>You don’t have to forgive me immediately.<br>I just wanted you to know that I’m sorry, and that you matter.</p>
+<button id="b1">Send Me A Smile ♡</button><button onclick="scrollTo(0,0)">Read Everything Again</button><button id="b3">Keep This Little World</button><p class="hand" id="fm" style="min-height:70px"></p></section>
+</main>
+<div id="lm" hidden onclick="this.hidden=true"><div class="card" style="max-width:420px;text-align:left"><h3 id="lt"></h3><p class="hand" id="lx"></p><button>Close ♡</button></div></div>
+<script>
+const $=s=>document.querySelector(s),E=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;e.innerHTML=h;return e};
+const LETTER=`Dear Areeba,\n\nI know that simply saying sorry doesn’t automatically make everything okay.\n\nBut I don’t want my silence, my ego, or my inability to express myself properly to make you feel like you don’t matter.\n\nYou do matter.\n\nI’m genuinely sorry if I hurt you or made you feel anything less than special. You deserve patience, kindness, understanding, and effort.\n\nI’m not making this to force you to forgive me. I’m making it because you deserve to know that I’m sorry, and that I care.`;
+const C=[["A Girl Named Areeba","Some people enter your life so quietly, and somehow become a part of your thoughts in ways you never expected.","🌸"],["The Little Things","Small conversations, silly jokes, unexpected smiles. Ordinary things that somehow become memories.","🎀"],["Things I Should Have Done Better","Sometimes I let emotions speak louder than understanding. I forget that the person in front of me deserves gentleness too.","🌷"],["If I Could Rewind Time","There’s no button for yesterday. But if there were, I’d choose my words more carefully and listen more patiently.","⏳"],["What You Mean To Me","You are someone whose happiness matters to me. Someone I want to see smiling, laughing, and feeling appreciated.","💗"],["My Apology","I’m sorry, Areeba. Not because I want everything to go back to normal immediately, but because I could have done better.","🌹"],["What I Promise To Work On","Listening, communicating, understanding, and showing through actions what my words sometimes fail to say.","🦋"],["The Last Page","If you take nothing else from this story, take this: you matter, your feelings matter, and I’m truly sorry.","✨"]];
+const R=["Your smile","Your laugh","The way you talk","Your cute reactions","Your personality","How you make ordinary moments special","Your little habits","Your kindness","The way you express yourself","Your presence","Your sense of humor","Your beautiful heart","Your random conversations","How easily you make me smile","Simply being you","Your tiny, unexpected jokes","The way you care about details","Your honesty","How your voice sounds when you’re excited","Your gentle side","Your stubborn side, honestly","The way you light up a room","Your good taste in everything","How real you are","That you’re worth every effort"];
+const L=[["Open when you’re sad","I’m sorry you’re feeling low. Your sadness isn’t a problem to fix or hurry. Be gentle with yourself today, drink some water, and let the day be slow. You are cared about, even on quiet days."],["Open when you need a smile","Here’s a small reminder: someone out there thinks you’re wonderful, exactly as you are. Go look in a mirror and smile at someone who deserves it. 🌼"],["Open when you’re overthinking","Your thoughts are loud, but they aren’t always right. Breathe in slowly. You are not too much, and you are not hard to care about. You deserve calm."],["Open when you feel unappreciated","You are seen. Your effort, your kindness, your little details: they matter, and they don’t go unnoticed. Thank you for being exactly who you are."],["Open when you need reassurance","Your feelings are valid. You deserve to be treated with patience and respect. My apology is real, and you never have to answer it before you’re ready."],["Open whenever you want","No reason needed. I just hope something in this little world made your day softer. Take all the time you want. 🌸"]];
+const P=["I will listen more carefully.","I will communicate instead of assuming.","I will respect your feelings.","I will try to understand before reacting.","I will be more thoughtful with my words.","I will show my care through actions.","I will give you space when you need it."];
+const GIFT=`Dear Areeba,\n\nIf I could give you one thing, it would be the ability to see yourself through the eyes of someone who appreciates you.\n\nYou would see how special your little details are. That your feelings are important. That you deserve kindness, patience, and happiness.\n\nI cannot promise to be perfect. But I can promise that my apology is genuine and that I want to keep learning how to treat you better.\n\nThank you for being you.\n\nI’m sorry, Areeba.\n\nWith all my sincerity,\nSomeone who cares about you. ♡`;
+let ac,mt,on=false,k=0;const N=[262,330,392,330,294,349,440,349];
+function tick(){const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;o.frequency.value=N[k++%8];g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.06,t+.05);g.gain.exponentialRampToValueAtTime(.0001,t+1.3);o.connect(g).connect(ac.destination);o.start();o.stop(t+1.4)}
+function music(f){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();clearInterval(mt);if(f){ac.resume();mt=setInterval(tick,700)}on=f;$('#mu').textContent=f?'♪ on':'♪ off'}catch(e){}}
+function petals(n,b){for(let i=0;i<n;i++){const p=E('span','p','🌸');p.style.cssText=`left:${Math.random()*100}vw;font-size:${12+Math.random()*14}px;animation-duration:${(b?4:10)+Math.random()*6}s;animation-delay:${Math.random()*(b?1.5:9)}s;opacity:.8`;document.body.append(p);if(b)setTimeout(()=>p.remove(),12000)}}
+function type(el,t,i=0){el.textContent=t.slice(0,i);if(i<t.length)setTimeout(()=>type(el,t,i+1),20);else if(el.id=='tw')$('#more').hidden=false}
+petals(12);
+$('#go').onclick=()=>{$('#env').classList.add('open');$('#go').disabled=true;petals(34,1);music(true);setTimeout(()=>{$('#main').hidden=false;$('#main').scrollIntoView();type($('#tw'),LETTER)},1300)};
+$('#more').onclick=()=>{$('#mo').hidden=false;$('#more').hidden=true};
+let ci=0;function ch(){const[t,x,e]=C[ci],b=$('#chb');b.innerHTML=`<div class="big">${e}</div><h3>${t}</h3><p class="hand">${x}</p>`;b.classList.remove('turn');void b.offsetWidth;b.classList.add('turn');$('#pg').style.width=(ci+1)/C.length*100+'%';$('#cn').textContent=`Chapter ${ci+1} of ${C.length}`;$('#pv').disabled=!ci;$('#nx').disabled=ci==C.length-1}
+$('#pv').onclick=()=>{ci--;ch()};$('#nx').onclick=()=>{ci++;ch()};ch();
+R.forEach(r=>{const b=E('button','rc','🌷');b.onclick=()=>{b.textContent=r;b.classList.add('f')};$('#rs').append(b)});
+L.forEach(([t,x])=>{const b=E('button','rc','💌<br>'+t);b.onclick=()=>{$('#lt').textContent=t;$('#lx').textContent=x;$('#lm').hidden=false;petals(8,1)};$('#ls').append(b)});
+$('#lm .card').onclick=e=>e.stopPropagation();$('#lm button').onclick=()=>$('#lm').hidden=true;
+let gi,sp;$('#pl').onclick=()=>{let s=0,t=15;const a=$('#arena'),u=()=>$('#sc').textContent=`Hearts caught: ${s} · ${t}s left`;a.innerHTML='';u();clearInterval(gi);clearInterval(sp);
+sp=setInterval(()=>{const h=E('span','h','💖');h.style.left=Math.random()*85+'%';h.style.animationDuration=3+Math.random()*2+'s';h.onpointerdown=()=>{h.remove();s++;u()};a.append(h);setTimeout(()=>h.remove(),5200)},450);
+gi=setInterval(()=>{t--;u();if(t<=0){clearInterval(gi);clearInterval(sp);a.innerHTML=`<p class="hand" style="padding-top:90px">You caught ${s} hearts ♡<br>Play again?</p>`}},1000)};
+const cv=$('#sk'),cx=cv.getContext('2d');let dn=0;
+function cover(){cx.globalCompositeOperation='source-over';cx.fillStyle='#F48FB1';cx.fillRect(0,0,280,120);cx.fillStyle='#fff';cx.font='20px Nunito,sans-serif';cx.textAlign='center';cx.fillText('Scratch here ✿',140,68);cv.style.opacity=1;dn=0}cover();
+function sc(e){if(e.pointerType=='mouse'&&!e.buttons)return;const r=cv.getBoundingClientRect();cx.globalCompositeOperation='destination-out';cx.beginPath();cx.arc((e.clientX-r.left)*280/r.width,(e.clientY-r.top)*120/r.height,18,0,7);cx.fill();if(++dn>40)cv.style.opacity=0}
+cv.onpointermove=sc;cv.onpointerdown=sc;$('#rs2').onclick=cover;
+P.forEach(p=>$('#pm').append(E('div','pr card','<span class="big" style="font-size:1.8rem">🌸</span>'+p)));
+$('#gb').onclick=()=>{$('#gf').classList.add('shake');$('#gb').disabled=true;setTimeout(()=>{$('#gf').classList.remove('shake');$('#gf').textContent='🎀';petals(40,1);$('#gl').hidden=false;type($('#gt'),GIFT)},1100)};
+$('#b1').onclick=()=>{$('#fm').innerHTML='🌼<br>Thank you for reading. I hope you smile today.'};
+$('#b3').onclick=()=>{$('#fm').textContent='It’s yours to keep, always. Take care of yourself, Areeba. 🌸'};
+</script></body></html>
